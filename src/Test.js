@@ -5,13 +5,6 @@ import ReactDOM from 'react-dom';
 
 
 
-ReactDOM.render(
-<React.StrictMode>
-    <App />
-</React.StrictMode>,
-document.getElementById('root')
-
-);
 function Test(){
 return(
 

@@ -22,7 +22,21 @@
 
 import React from "react"
 import ReactDOM from "react-dom"
+import TodoContainer from './components/TodoContainer'
 
-const element = <h1>Hello from Create React App</h1>
+// const element = <h1>Hello from Create React App</h1>
 
-ReactDOM.render(element, document.getElementById("root"))
+// render html in root (index.html file in public folder)
+ReactDOM.render(
+
+  //verify for eny issues at runtime
+  <React.StrictMode>    
+    {/* render called component here*/}
+      <TodoContainer />
+  </React.StrictMode>,
+
+
+
+document.getElementById("root")
+
+)
