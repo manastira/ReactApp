@@ -24,15 +24,18 @@ class TodoContainer extends React.Component {
        };
 
 //enable communication between components
-       handleChange = id => {
+       handleChange = (id) => {
       //  console.log(`clicked ${id}`);
       debugger;
       this.setState(prevState => ({
       
         todos: prevState.todos.map(todo => {
           if (todo.id === id) {
-            return {
-              ...todo,
+            return { 
+             // id:todo.id,
+             // title: todo.title, 
+             
+             ...todo,          //--->  the short exam how to set the object items, otherwise we set completed and lose others values(in this case ID and Title)   
               completed: !todo.completed,
             }
           }
@@ -48,10 +51,8 @@ class TodoContainer extends React.Component {
   render() {
     return (
         <div>
-
             <Header />
-
-            <TodosList todos2 = {this.state.todos} handleChangeProps={this.handleChange} ></TodosList>
+            <TodosList todos = {this.state.todos} handleChangeProps={this.handleChange} ></TodosList>
         </div>
 
 //       <ul>
