@@ -1,6 +1,9 @@
 import React from "react"
 import TodosList from "./TodosList";
 import Header from "./Header";
+import InputTodo from "./InputTodo";
+import { v4 as uuidv4 } from "uuid";
+import '../../src/App.css';
 class TodoContainer extends React.Component {
 
     state = {
@@ -22,6 +25,19 @@ class TodoContainer extends React.Component {
           }
         ]
        };
+// submit and add new checkbox + title 
+       addTodoItem = title => {
+         if(title){
+          const newTodo = {
+            id: uuidv4(),
+            title: title,
+            completed: false
+          };
+          this.setState({
+            todos: [...this.state.todos, newTodo]
+          });
+        }
+      };
 
 //enable communication between components
        handleChange = (id) => {
@@ -44,15 +60,36 @@ class TodoContainer extends React.Component {
       }))
     }
 
-
-
-
-
+//filter the list (delete)
+      delTodo = id => {
+        this.setState({
+          todos: [...this.state.todos.filter(todo => {return todo.id !== id})]       
+        });  
+      };
+//edit/update title
+      setUpdate = (updatedTitle, id) => {
+        this.setState({
+          todos: this.state.todos.map(todo => {
+            if (todo.id === id) {
+              todo.title = updatedTitle
+            }
+            return todo
+          }),
+        })
+      }
   render() {
     return (
-        <div>
+        <div className="container">
+          <div className="inner">
             <Header />
-            <TodosList todos = {this.state.todos} handleChangeProps={this.handleChange} ></TodosList>
+            <InputTodo addTodoProps={this.addTodoItem} />
+            <TodosList 
+             todos = {this.state.todos}
+             handleChangeProps={this.handleChange}
+             deleteTodoProps={this.delTodo}
+             setUpdate={this.setUpdate}
+            />
+            </div>
         </div>
 
 //       <ul>

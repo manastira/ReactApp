@@ -1,7 +1,8 @@
 import React from "react"
 import TodoItem from "./TodoItem";
+import { Component } from "react"
 
-class TodosList extends React.Component {
+class TodosList extends  Component {
   render() {
     return (
       <ul>
@@ -10,7 +11,9 @@ class TodosList extends React.Component {
           key={todo.id} 
           todo = {todo}  
           handleChangeProps={this.props.handleChangeProps}
-          > </TodoItem>
+          deleteTodoProps={this.props.deleteTodoProps}
+          setUpdate={this.props.setUpdate}
+          />
         ))}
       </ul>
     )
