@@ -47,7 +47,11 @@ class TodoItem extends React.Component{
       editing: true,
     })
   }
-  
+  handleUpdatedDone = event => {
+   
+      this.setState({ editing: false })
+    
+  }
   state = {
     editing: false,
   }
@@ -69,7 +73,7 @@ class TodoItem extends React.Component{
     }
     return (
       <li className={styles.item}>
-        <div onDoubleClick={this.handleEditing} style={viewMode}>
+        <div onDoubleClick={this.handleEditing} style={viewMode} >
             
                   <input 
                   type="checkbox"
@@ -94,6 +98,9 @@ class TodoItem extends React.Component{
               onChange={e => {
                 this.props.setUpdate(e.target.value, id)
               }}
+             
+            
+              onBlur={this.handleUpdatedDone}
               />
           </li>
     )
