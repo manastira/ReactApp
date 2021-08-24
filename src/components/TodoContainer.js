@@ -7,23 +7,7 @@ import '../../src/App.css';
 class TodoContainer extends React.Component {
 
     state = {
-        todos: [
-          {
-            id: 1,
-            title: "Setup development environment",
-            completed: true
-          },
-          {
-            id: 2,
-            title: "Develop website and add content",
-            completed: false
-          },
-          {
-            id: 3,
-            title: "Deploy to live server",
-            completed: false
-          }
-        ]
+        todos: []
        };
 // submit and add new checkbox + title 
        addTodoItem = title => {
@@ -76,6 +60,33 @@ class TodoContainer extends React.Component {
             return todo
           }),
         })
+      }
+ //retrive data from API, the methos calls after render and before set DOM 
+      componentDidMount() {
+       const data = JSON.parse(localStorage.getItem("todos"))
+        if(data){
+          //if call setSDtate in DidMount call twice render()
+          this.setState({todos:data})
+        }
+        else
+        {
+        fetch("https://jsonplaceholder.typicode.com/todos?_limit=100")
+          .then(response => response.json())
+          .then(data => this.setState({ todos:data}) );
+        }
+      }
+// call method immediately after DidMount 
+      componentDidUpdate(prevProps, prevState) {
+        debugger;
+        // update logic here
+        if(prevState.todos !== this.state.todos) {
+          // logic here
+          localStorage.setItem("todos",JSON.stringify(this.state.todos))
+        }
+      }
+// destroy delete data
+      componentWillUnmount() {
+        console.log("Cleaning up...")
       }
   render() {
     return (
